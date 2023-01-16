@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Quizzes;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,12 +20,23 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/quiz/{quiz}', function (Request $request, int $quiz) {
+    dd($quiz);
+    $quiz = Quizzes::find($quiz);
+    return Inertia::render('Quizzes/Show', [
+        'quiz' => $quiz,
+    ]);
+})->middleware(['auth', 'verified'])->name('quiz.show');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/quizzes', function () {
-    return Inertia::render('Quizzes/Quizzes');
+    $quizzes = Quizzes::orderBy('id', 'desc')->paginate(6);
+    return Inertia::render('Quizzes/Quizzes', [
+        'quizzes' => $quizzes,
+    ]);
 })->middleware(['auth', 'verified'])->name('quizzes');
 
 Route::middleware('auth')->group(function () {

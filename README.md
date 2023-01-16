@@ -5,6 +5,7 @@ EduQuizz est une application full stack conçue pour faciliter l'utilisation de 
 ## technologies
 
 -   [x] React
+-   [x] InertiaJS
 -   [x] php 8.1.6
 -   [x] Laravel 9
 -   [x] TailwindCSS
@@ -16,10 +17,37 @@ EduQuizz est une application full stack conçue pour faciliter l'utilisation de 
 
 -   [ ] Ajouter un système de points pour les élèves
 -   [ ] Ajouter un système de classement pour les élèves
--   [ ] Ajouter un système de classement pour les enseignants
--   [ ] Ajouter un système de classement pour les quizz
--   [ ] Ajouter un système de classement pour les questions
 -   [ ] Ajouter un système de design pour les quizz
+
+## UML Quizz avec BDD
+
+-   quizzes
+
+    -   id
+    -   user_id
+    -   title
+    -   description?
+    -   status
+    -   create_at
+    -   updated-at
+
+-   questions
+
+    -   id
+    -   quiz_id
+    -   question
+    -   media
+    -   media_type
+    -   create_at
+    -   updated-at
+
+-   answers
+    -   id
+    -   question_id
+    -   answer (string)
+    -   is_correct (boolean)
+    -   create_at
+    -   updated-at
 
 ## design
 
