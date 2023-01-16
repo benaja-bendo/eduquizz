@@ -21,6 +21,18 @@ EduQuizz est une application full stack conçue pour faciliter l'utilisation de 
 
 ## UML Quizz avec BDD
 
+-   users
+
+    -   id
+    -   name
+    -   email
+    -   email_verified_at
+    -   role (admin, teacher, student) (enum)
+    -   password
+    -   remember_token
+    -   created_at
+    -   updated_at
+
 -   quizzes
 
     -   id
