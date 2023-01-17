@@ -3,6 +3,7 @@ import { Head } from "@inertiajs/inertia-react";
 import ListeQuizzes from "@/Components/ListeQuizzes";
 
 export default function Quizzes(props) {
+    console.log(props.quizzes);
     return (
         <AuthenticatedLayout
             auth={props.auth}

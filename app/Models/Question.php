@@ -12,6 +12,15 @@ class Question extends Model
     protected $fillable = [
         'quiz_id',
         'question',
-        'answer',
     ];
+
+    public function quiz(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Quiz::class);
+    }
+
+    public function answers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

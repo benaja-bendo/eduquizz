@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Resources\QuizzeResource;
 use App\Models\Quizzes;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
     if (auth()->check()) {
         return redirect()->route('dashboard');
     }
@@ -21,7 +22,6 @@ Route::get('/', function () {
 });
 
 Route::get('/quiz/{quiz}', function (Request $request, int $quiz) {
-    dd($quiz);
     $quiz = Quizzes::find($quiz);
     return Inertia::render('Quizzes/Show', [
         'quiz' => $quiz,
@@ -35,7 +35,7 @@ Route::get('/dashboard', function () {
 Route::get('/quizzes', function () {
     $quizzes = Quizzes::orderBy('id', 'desc')->paginate(6);
     return Inertia::render('Quizzes/Quizzes', [
-        'quizzes' => $quizzes,
+        'quizzes' => QuizzeResource::collection($quizzes)
     ]);
 })->middleware(['auth', 'verified'])->name('quizzes');
 

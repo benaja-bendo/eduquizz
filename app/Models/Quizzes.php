@@ -21,4 +21,8 @@ class Quizzes extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function questions(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Question::class, 'quiz_id');
+    }
 }
