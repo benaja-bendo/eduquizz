@@ -33,17 +33,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user1->quizzes()->saveMany(
-            Quizzes::factory()->count(3)->make()
+            Quizzes::factory()->count(15)->make()
         );
         Quizzes::all()->each(function ($quiz) {
             $quiz->questions()->saveMany(
-                Question::factory()->count(3)->make()
+                Question::factory()->count(5)->make()
             );
         });
 
         Question::all()->each(function ($question) {
             $question->answers()->saveMany(
-                Answer::factory()->count(3)->make(
+                Answer::factory()->count(4)->make(
                     [
                         'is_correct' => false,
                     ]

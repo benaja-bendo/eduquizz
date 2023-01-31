@@ -1,26 +1,51 @@
-export default function Create(props) {
-    return (
-        <AuthenticatedLayout
-            auth={props.auth}
-            errors={props.errors}
-            header={
-                <div className="flex justify-between items-center">
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Create Quizz
-                    </h2>
-                    <div className="flex"></div>
-                </div>
-            }
-        >
-            <Head title="Create Quizz" />
+import React, { useEffect } from "react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Head } from "@inertiajs/inertia-react";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import { useSelector } from "react-redux";
+import TitleQuiz from "./../../Components/createQuiz/TitleQuiz";
+import QuestionQuiz from "./../../Components/createQuiz/QuestionQuiz";
+import { useUnload } from "./../../utils/utils";
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">Create Quizz</div>
+export default function Create(props) {
+    const quiz = useSelector((state) => state.quiz);
+    const saveQuiz = async () => {
+        await axios.post("/quiz", quiz);
+    };
+    useUnload((e) => {
+        e.preventDefault();
+        console.log("test");
+        const exit = confirm("Are you sure you want to leave?");
+        if (exit) window.close();
+    });
+    return (
+        <>
+            <Head title="Create Quizz" />
+            <AuthenticatedLayout
+                auth={props.auth}
+                errors={props.errors}
+                header={
+                    <div className="flex justify-between items-center">
+                        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                            Création d'un quizz
+                        </h2>
+                        <div className="flex">
+                            <button
+                                onClick={saveQuiz}
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            >
+                                Enregistrer
+                            </button>
+                        </div>
                     </div>
+                }
+            >
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 my-12">
+                    <TitleQuiz />
+                    <QuestionQuiz />
                 </div>
-            </div>
-        </AuthenticatedLayout>
+            </AuthenticatedLayout>
+        </>
     );
 }
