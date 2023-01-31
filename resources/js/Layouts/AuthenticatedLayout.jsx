@@ -29,10 +29,10 @@ export default function Authenticated({ auth, header, children }) {
                                     Dashboard
                                 </NavLink>
                                 <NavLink
-                                    href={route("quizzes")}
-                                    active={route().current("quizzes")}
+                                    href={route("quiz.index")}
+                                    active={route().current("quiz.index")}
                                 >
-                                    Quizzes
+                                    Liste des Quiz
                                 </NavLink>
                             </div>
                         </div>
