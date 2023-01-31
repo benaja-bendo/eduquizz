@@ -82,6 +82,24 @@ const quizSlice = createSlice({
                     (answer) => answer.id === action.payload.indexAnswer
                 ).is_correct = action.payload.is_correct;
         },
+
+        rezetState: (state, action) => {
+            state.title = "";
+            state.description = "";
+            state.questions = [
+                {
+                    id: uuidv4(),
+                    question: "",
+                    answers: [
+                        {
+                            id: uuidv4(),
+                            answer: "",
+                            is_correct: false,
+                        },
+                    ],
+                },
+            ];
+        },
     },
 });
 export const {
@@ -92,6 +110,7 @@ export const {
     setTitleQuestion,
     setTitleAnswer,
     changeCorrectAnswer,
+    rezetState,
 } = quizSlice.actions;
 
 export default quizSlice.reducer;

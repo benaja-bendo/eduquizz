@@ -3,22 +3,30 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/inertia-react";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { rezetState } from "./store/quizSlice";
 import TitleQuiz from "./../../Components/createQuiz/TitleQuiz";
 import QuestionQuiz from "./../../Components/createQuiz/QuestionQuiz";
 import { useUnload } from "./../../utils/utils";
 
 export default function Create(props) {
     const quiz = useSelector((state) => state.quiz);
+    const dispatch = useDispatch();
     const saveQuiz = async () => {
         await axios.post("/quiz", quiz);
     };
     useUnload((e) => {
         e.preventDefault();
-        console.log("test");
         const exit = confirm("Are you sure you want to leave?");
         if (exit) window.close();
     });
+
+    useEffect(() => {
+        return () => {
+            dispatch(rezetState());
+        };
+    }, []);
+
     return (
         <>
             <Head title="Create Quizz" />
