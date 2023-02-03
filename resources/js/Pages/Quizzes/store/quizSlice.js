@@ -45,6 +45,11 @@ const quizSlice = createSlice({
                 },
             ];
         },
+        deleteQuestion: (state, action) => {
+            state.questions = state.questions.filter(
+                (question) => question.id !== action.payload.index
+            );
+        },
         setTitleQuestion: (state, action) => {
             state.questions.find(
                 (question) => question.id === action.payload.index
@@ -63,6 +68,20 @@ const quizSlice = createSlice({
                     is_correct: false,
                 },
             ];
+        },
+
+        deleteAnswer: (state, action) => {
+            state.questions
+                .find(
+                    (question) => question.id === action.payload.indexQuestion
+                )
+                .answers = state.questions
+                .find(
+                    (question) => question.id === action.payload.indexQuestion
+                )
+                .answers.filter(
+                    (answer) => answer.id !== action.payload.indexAnswer
+                );
         },
         setTitleAnswer: (state, action) => {
             state.questions
@@ -111,6 +130,8 @@ export const {
     setTitleAnswer,
     changeCorrectAnswer,
     rezetState,
+    deleteQuestion,
+    deleteAnswer,
 } = quizSlice.actions;
 
 export default quizSlice.reducer;

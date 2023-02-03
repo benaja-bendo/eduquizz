@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/inertia-react";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { useSelector, useDispatch } from "react-redux";
-import { rezetState } from "./store/quizSlice";
+import { rezetState,deleteQuestion } from "./store/quizSlice";
 import TitleQuiz from "./../../Components/createQuiz/TitleQuiz";
 import QuestionQuiz from "./../../Components/createQuiz/QuestionQuiz";
 import { useUnload } from "./../../utils/utils";
@@ -20,7 +20,7 @@ export default function Create(props) {
         const exit = confirm("Are you sure you want to leave?");
         if (exit) window.close();
     });
-
+// on unmount reset the state
     useEffect(() => {
         return () => {
             dispatch(rezetState());
