@@ -16,15 +16,10 @@ export default function Dashboard(props) {
         }
     };
 
-    const { data, error } = useEventSource(
-        "http://localhost:9000/.well-known/mercure"
-    );
-    if (error) {
-        console.log("see error", error);
-    }
-    if (data) {
-        console.log("see data", data);
-    }
+    const { data, error } = useEventSource({
+        mercureURL: "http://localhost:9000/.well-known/mercure",
+        topicURL: "https://example.com/users/dunglas",
+    });
 
     return (
         <AuthenticatedLayout
@@ -42,9 +37,12 @@ export default function Dashboard(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            Vous êtes connecté !
+                            Vous êtes un{" "}
+                            <span className="font-bold">
+                                {props.auth.user.role}
+                            </span>
                         </div>
-                        <div className="p-6 text-gray-900">
+                        <div className="p-6 text-gray-900 bg-slate-500 text-center">
                             Vous êtes un{" "}
                             <span className="font-bold">
                                 {props.auth.user.role}

@@ -2,6 +2,10 @@
 
 EduQuizz est une application full stack conçue pour faciliter l'utilisation de quizz en classe. Elle permet aux enseignants de créer facilement des quizz personnalisés et de les diriger en direct auprès de leurs élèves, qui peuvent accéder aux quizz en scannant un code QR. Les résultats des quizz sont enregistrés de manière efficace pour une utilisation ultérieure.
 
+## Prérequis
+
+-   Pour `php` il est nécessaire d'installé l'extension `imagick` pour `php` et `composer` pour utiliser le format `png` (utile pour les QR codes pour la librairie `simple-qrcode`)
+
 ## technologies
 
 -   [x] React
